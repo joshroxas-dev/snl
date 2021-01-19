@@ -1,0 +1,242 @@
+first 
+beginning good of sales, nabenta niyo i-add
+lahat ng income at inventory i-add 
+expenses - minus
+finals total income - puhunan - 
+
+Purchases date, first date, beginning date.
+Next most recent solds
+balance ng total expenses at total income.
+
+
+
+
+
+accountname
+acctypeid
+accdetailsid
+currency
+accbalance
+balancedate
+
+
+expenseSavemain
+
+add expenses credit
+balance debit
+
+add total balance
+add total expenses 
+minus 
+times pasok ng tao 
+
+
+
+$scope.deleteaccount = function(accountid, accountname){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.value) {
+                $http({
+                    method:"POST",
+                    url:"app-controller/php-function/function.php",
+                    data:{
+                        'id'    : accountid,
+                        'action':'deleteaccount',
+                    }
+                }).success(function(datas){
+                    if(datas.message == 'success'){
+                        Swal.fire(
+                            'Deleted!',
+                            'Account has been deleted.',
+                            'success'
+                        )
+                        $scope.init();
+                        var logsdata = {
+                            'event' : 'Delete',
+                            'description' : 'Deleted Account: '+ accountname,
+                            'module' : 'Account'
+                        }
+                        $scope.saveAuditLogs(logsdata);
+                    }else{
+                        Swal.fire(
+                            'Delete Failed!',
+                            'An error has been occured!',
+                            'error'
+                        )
+                    }
+                })
+            }
+        })
+    }
+
+
+if($form_data->action == 'deleteaccount'){
+		$id = $form_data->id;
+		$query = "
+		DELETE FROM accounts WHERE accountid='".$form_data->id."'
+		";
+		$statement = $connect->prepare($query);
+		if($statement->execute()){
+			$message = 'success';
+		}else{
+            $message = 'error';
+        }
+
+		$output = array(
+			'message'	=>	$message
+		);
+	}
+
+
+
+Outstanding Payables
+- Credit Cards
+- Rent
+- Utilities (ISP, Water, Electricity, Security, and Maintenance)
+- Retainer's Fee (CPA)
+- Subscriptions
+- Web Developer's Retainer Fee
+
+
+General Ledger
+-List of all accounts to be used 
+
+Accounts:
+- Cash
+- Accounts Receivable
+- Accounts Payable
+- Inventory
+
+Debit - Withdrawal 
+Credit - Deposit
+
+
+
+
+
+Collections Report
+-due payements/utang for each customer
+
+total Payable(utang)
+payments (date paid and amount)
+Due date
+
+
+
+
+
+
+PO PRint Computations
+
+Unit Price (PHP) = Unit Price * Exchange Rate
+Total Price ($) = Quanity * Unit Price ($)
+Total Price (PHP) = Quanity * Unit Price (PHP)
+Freigh-In (Total) = Quantity * Frieght-In (Per Unit)
+Tax (Per unit) = (Unit Price(PHP) / Total Price (PHP)) * Tax(total per product))
+Tax (Total Per Product) = Quantity * Tax (Per Unit)
+Cost per unit = Unit Price (PHP) + Frieght-in(Per unit) + Tax (Per unit)
+Total Cost of Goods = Quantity * cost per unit
+
+My income
+total of customer order sales 
+total of purchase order sales
+total expenses
+
+profit and loss 
+list of expenses categories and total number of data
+
+Income Comparison
+total incomes PO and CO sorted by monthly, quarterly, and annually
+
+Purchases by Product/Service Detail
+Total = SUM of all (customerorder.totalamountpesos multiplied customerorder.quantity) filtered by products
+
+Customer Balance Summary 
+Total = SUM of all total expense amount
+
+Transactions List by Date
+Customer order queries
+
+Purchase by Supplier Detail
+Total = SUM of all (customerorder.totalamountpesos multiplied customerorder.quantity) filtered by supplier
+
+
+Journal
+data from expenses (not sure about debit/credit) 
+
+Transaction by Account 
+data from expenses filtered by account type
+
+Bill Payment List
+data from expenses filtered by payee (customer and suppliers)
+
+Cheque Detail 
+data from expenses filtered by credit card used and payee
+
+Open Invoices
+total amount of expenses
+
+Profit and Loss by Month and Profit and Loss % of Total Income
+Total sales for customer order
+total sales for purchase order
+total shipping Income from PO and CO
+Final total for CO and PO
+Revenue = total number of units sold x price from (PO and CO)
+Total cost of good solds (PO and CO)
+Gross profit = revenue - total cost of Goods
+Net earnings = total PO and CO - Total cost good solds
+Total expenses 
+
+sorted by month and year
+
+
+
+ 
+
+ 1st Part
+Invoice Number
+Invoice Date
+Customer Name
+Classification (Wholesale/Retail)
+Billing Address
+Shipping Address
+Mobile Number
+E-mail Address
+
+2nd Part
+Order No/Order ID
+Order Platform
+Mode of Payment
+Courier
+Ship Date
+
+3rd Part of the Invoice
+
+Reflection of any Accounts Receivable from the Customer
+Total Amount Due (Receivable and New Charges)
+from the Customer including the new chargeable amount 
+*Please check sample Sales Invoice generated from Quickbooks
+
+
+ 4th Part
+
+SKU
+Product Brand
+Product Size
+Quantity
+SRP (Dependent upon Customer Classification: Wholesale/Retail)
+Sales Discount
+Shipping Fee
+
+Bottom Part of the Invoice:
+Social Media Accounts ‘ URL
+
+
+

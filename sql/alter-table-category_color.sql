@@ -1,0 +1,1 @@
+ALTER TABLE `category_color` ADD `color_guid` VARCHAR(110) NOT NULL AFTER `id`;
